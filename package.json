@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "poketajm-remix-4274",
   "private": true,
   "sideEffects": false,
   "scripts": {
@@ -8,15 +8,14 @@
     "build:server": "esbuild --platform=node --format=cjs ./server.ts --outdir=build --bundle --external:fsevents",
     "dev": "run-p dev:*",
     "dev:server": "cross-env NODE_ENV=development npm run build:server -- --watch",
-    "dev:remix": "remix dev --manual -c \"node --require ./mocks --watch-path ./build/server.js --watch ./build/server.js\"",
+    "dev:remix": "remix dev --manual -c \"node --watch-path ./build/server.js --watch ./build/server.js\"",
     "docker": "docker compose up -d",
     "format": "prettier --write .",
-    "format:repo": "npm run format && npm run lint -- --fix",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "setup": "prisma generate && prisma migrate deploy && prisma db seed",
+    "setup:test": "prisma generate && prisma db push && prisma db seed",
     "start": "cross-env NODE_ENV=production node ./build/server.js",
-    "start:mocks": "cross-env NODE_ENV=production node --require ./mocks --require dotenv/config ./build/server.js",
-    "test": "vitest",
+    "test": "dotenv -e .env.test -- vitest",
     "test:e2e:dev": "start-server-and-test dev http://localhost:3000 \"npx cypress open\"",
     "pretest:e2e:run": "npm run build",
     "test:e2e:run": "cross-env PORT=8811 start-server-and-test start:mocks http://localhost:8811 \"npx cypress run\"",
@@ -31,12 +30,15 @@
     "/postgres-data"
   ],
   "dependencies": {
+    "@headlessui/react": "^2.0.3",
+    "@heroicons/react": "^2.1.3",
     "@isaacs/express-prometheus-middleware": "^1.2.1",
     "@prisma/client": "^4.16.2",
     "@remix-run/css-bundle": "^2.9.1",
     "@remix-run/express": "^2.9.1",
     "@remix-run/node": "^2.9.1",
     "@remix-run/react": "^2.9.1",
+    "@tailwindcss/forms": "^0.5.7",
     "bcryptjs": "^2.4.3",
     "chokidar": "^3.6.0",
     "compression": "^1.7.4",
@@ -48,7 +50,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "source-map-support": "^0.5.21",
-    "tiny-invariant": "^1.3.3"
+    "tiny-invariant": "^1.3.3",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
@@ -86,6 +89,7 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-testing-library": "^6.2.0",
+    "fishery": "^2.2.2",
     "happy-dom": "^14.3.9",
     "msw": "^2.2.13",
     "npm-run-all": "^4.1.5",

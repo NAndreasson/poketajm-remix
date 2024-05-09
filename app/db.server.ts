@@ -8,6 +8,7 @@ const prisma = singleton("prisma", getPrismaClient);
 
 function getPrismaClient() {
   const { DATABASE_URL } = process.env;
+  console.log("DATABASE_URL", DATABASE_URL);
   invariant(typeof DATABASE_URL === "string", "DATABASE_URL env var not set");
 
   const databaseUrl = new URL(DATABASE_URL);
@@ -36,6 +37,7 @@ function getPrismaClient() {
   // re-run per request like everything else is. So if you need to change
   // something in this file, you'll need to manually restart the server.
   const client = new PrismaClient({
+    log: ["query", "info", "warn"],
     datasources: {
       db: {
         url: databaseUrl.toString(),

@@ -1,0 +1,5 @@
+FROM postgres:latest
+
+# RUN CREATE EXTENSION pg_trgm;
+
+
