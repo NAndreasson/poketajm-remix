@@ -32,6 +32,20 @@ TODOs:
 
   > **Note:** The npm script will complete while Docker sets up the container in the background. Ensure that Docker has finished and your container is running before proceeding.
 
+- Set up env variables
+
+Add the following to .env (given that you're using docker as above)
+
+```
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/postgres"
+```
+
+- Push the DB schema
+
+```sh
+npx prisma db push
+```
+
 - Initial setup:
 
   ```sh
