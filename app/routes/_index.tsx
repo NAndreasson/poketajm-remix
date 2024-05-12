@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Link, json, useLoaderData } from "@remix-run/react";
-import { getTypes } from "~/queries/type.server";
+import { getTypes } from "~/queries/getTypes.server";
 import { searchPokemons } from "~/queries/searchPokemons.server";
 
 export const meta: MetaFunction = () => [{ title: "Remix Notes" }];

@@ -96,7 +96,6 @@ describe("createPokemon", () => {
       // Should never run
       expect(rikachu).toBeUndefined();
     } catch (error) {
-      console.log("Error", error)
       expect(error.message).toBe("Predecessor already has a successor");
     }
   });
@@ -128,7 +127,6 @@ describe("createPokemon", () => {
       // Should never run
       expect(rikachu).toBeUndefined();
     } catch (error) {
-      console.log("Error", error)
       expect(error.message).toBe("Evolution already has a predecessor");
     }
   });

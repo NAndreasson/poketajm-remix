@@ -9,7 +9,7 @@ import invariant from "tiny-invariant";
 import { z } from "zod";
 import { PokemonListItem } from "~/components/PokemonListItem";
 import { SortPokemonListInput } from "~/components/SortPokemonListInput";
-import { getPokemonsByType } from "~/queries/type.server";
+import { getPokemonsByType } from "~/queries/getPokemonsByType.server";
 
 // Create zod schema to validate the sort param param:order where order is asc or desc
 const ParamSchema = z.enum(["name", "height", "weight"]);
@@ -47,7 +47,6 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   const sortOrder = getSortOrder(request);
 
   const type = await getPokemonsByType(typeId, { sort: sortOrder });
-  console.log(type);
   if (!type) {
     throw new Response("Not Found", { status: 404 });
   }

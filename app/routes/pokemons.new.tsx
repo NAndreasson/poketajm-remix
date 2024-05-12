@@ -9,13 +9,14 @@ import { EvolutionInput } from "~/components/EvolutionInput";
 import { SimpleInput } from "~/components/SimpleInput";
 import { TypeInput } from "~/components/TypeInput";
 import { createPokemon } from "~/queries/createPokemon.server";
+import { getTypes } from "~/queries/getTypes.server";
 import {
   getPokemonsWithoutPredecessors,
   getPokemonsWithoutSuccessors,
 } from "~/queries/pokemonEvolutionQueries.server";
-import { getTypes } from "~/queries/type.server";
 import { ensureDisjointTypes } from "~/utils/set";
 
+// TODO: extract into separate file
 const pokemonCreateSchema = z
   .object({
     name: z.string(),
@@ -58,7 +59,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
   try {
     const pokemon = await createPokemon(parseResult.data);
-    console.log(pokemon);
     return redirect(`/pokemons/${pokemon.id}`);
   } catch (error) {
     return json({ errors: [error.message] }, { status: 500 });
