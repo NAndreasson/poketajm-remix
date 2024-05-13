@@ -1,11 +1,11 @@
 import { pokemonFactory, resetDB } from "~/test-utils";
 import { searchPokemons } from "./searchPokemons.server";
 
-beforeEach(async () => {
-  resetDB()
-});
-
 describe("searchokemons", () => {
+  beforeEach(async () => {
+    await resetDB();
+  });
+
   test("returns pokemons that match the search query", async () => {
     await pokemonFactory.create({
       name: "Raichu",
@@ -13,7 +13,7 @@ describe("searchokemons", () => {
     await pokemonFactory.create({
       name: "Pikachu",
     });
-    
+
     await pokemonFactory.create({
       name: "Charizard",
     });
@@ -24,6 +24,5 @@ describe("searchokemons", () => {
     const pokemonNames = pokemons.map((pokemon) => pokemon.name);
     expect(pokemonNames).toContain("Raichu");
     expect(pokemonNames).toContain("Pikachu");
-    
-  })
-})
+  });
+});
