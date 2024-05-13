@@ -34,9 +34,15 @@ export default function Index() {
 function BrowsePokemonByType({ types }: { types: ReturnType<typeof useLoaderData<typeof loader>>["types"]}) {
   return (
     <div className="w-full my-12">
-      <h1 className="font-display text-3xl tracking-tight tet-slate-900">
+      <div className="sm:flex sm:items-center">
+      <h1 className="sm:flex-auto font-display text-3xl tracking-tight tet-slate-900">
         Browse Pokemon by Type
       </h1>
+      <Link to="/pokemons/new" className="rounded bg-white px-2 py-1 text-lg font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+>
+        Add pokemon
+      </Link>
+      </div>
       <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {types.map((type) => (
           <li key={type.id}>
