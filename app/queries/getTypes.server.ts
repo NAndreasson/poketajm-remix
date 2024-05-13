@@ -2,7 +2,7 @@ import { Pokemon } from "@prisma/client";
 import { prisma } from "~/db.server";
 
 interface TypeWithPokemonCount {
-    id: string;
+    id: number;
     name: string;
     _count: {
         pokemons: number;
@@ -12,7 +12,7 @@ interface TypeWithPokemonCount {
     }[];
 }
 
-export function getTypes(): TypeWithPokemonCount[] {
+export function getTypes(): Promise<TypeWithPokemonCount[]> {
     return prisma.type.findMany({
         include: {
             _count: {
