@@ -69,7 +69,7 @@ describe("createPokemon", () => {
     expect(predecessorsToRaichu[0].name).toBe("Pikachu");
   });
 
-  test.only("throws an error if the predecessor already has an evolution", async () => {
+  test("throws an error if the predecessor already has an evolution", async () => {
     const electricType = await typeFactory.create({ name: "Electric" });
     const raichu = await pokemonFactory.create({
       name: "Raichu",

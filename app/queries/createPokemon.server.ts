@@ -10,21 +10,18 @@ interface CreatePokemonInput extends Pokemon {
 
 export async function createPokemon(pokemon: CreatePokemonInput) {
   const { predecessorId, evolutionId } = pokemon;
-  console.log("Predecessor", predecessorId)
-  console.log("Evolution", evolutionId)
   if (predecessorId) {
-    assertPredecessorWithoutSuccessor({ predecessorId });
+    await assertPredecessorWithoutSuccessor({ predecessorId });
   }
 
   if (evolutionId) {
-    assertSuccessorWithouPredecessor({ evolutionId }); 
+    await assertSuccessorWithouPredecessor({ evolutionId }); 
   }
 
   if (predecessorId && evolutionId) {
-    assertNoEvolutionaryLoop({ predecessorId, evolutionId });
+    await assertNoEvolutionaryLoop({ predecessorId, evolutionId });
   }
 
-  console.log("Creating Pokemon")
   return prisma.$transaction(async (tx) => {
     const createPokemonQuery = await tx.pokemon.create({
       data: {
