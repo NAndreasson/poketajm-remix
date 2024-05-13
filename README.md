@@ -7,7 +7,6 @@ TODOs:
 - [ ] Code cleanup etc... 
 - [ ] Add some simple Playwright tests
 - [ ] Fix better accessibility for screen readers.
-- [ ] Proper fuzzy search
 - [ ] Fix file upload
 - [ ] Fix hotlinking images
 
