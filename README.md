@@ -71,4 +71,14 @@ Look for the queries inside app/queries
 
 ## Testing
 
-Unfortunately I'm encountering a segfault when running the tests.
+- Set up the test DB
+
+```sh
+npm run setup:test
+```
+
+- Run the tests
+
+```sh
+npm run test
+```
