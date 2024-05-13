@@ -37,7 +37,7 @@ function getPrismaClient() {
   // re-run per request like everything else is. So if you need to change
   // something in this file, you'll need to manually restart the server.
   const client = new PrismaClient({
-    log: ["query", "info", "warn"],
+    log: ["info", "warn"],
     datasources: {
       db: {
         url: databaseUrl.toString(),
