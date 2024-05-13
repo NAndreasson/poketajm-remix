@@ -1,22 +1,14 @@
+import { Pokemon, Prisma } from "@prisma/client";
 import { prisma } from "~/db.server";
 
 export function searchPokemons(search: string) {
- // TODO: not exactly fuzzy search, but close enough
-  return prisma.pokemon.findMany({
-    where: {
-      name: { contains: search, mode: "insensitive" },
-    },
-    include: {
-      types: {
-        include: {
-          type: true,
-        },
-      },
-      weaknesses: {
-        include: {
-          type: true,
-        },
-      },
-    },
-  });
+  const similarityThreshold = 0.1;
+  const query = Prisma.sql`
+      SELECT "Pokemon".*
+      FROM "Pokemon"
+      WHERE similarity("Pokemon"."name", ${search}) > ${similarityThreshold}
+      ORDER BY similarity("Pokemon"."name", ${search}) DESC;
+  `;
+
+  return prisma.$queryRaw<Pokemon[]>(query);
 }

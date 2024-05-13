@@ -15,14 +15,14 @@ describe("searchokemons", () => {
     });
 
     await pokemonFactory.create({
-      name: "Charizard",
+      name: "Duckle",
     });
 
-    const pokemons = await searchPokemons("chu");
+    const pokemons = await searchPokemons("pchu");
     expect(pokemons).toHaveLength(2);
 
     const pokemonNames = pokemons.map((pokemon) => pokemon.name);
-    expect(pokemonNames).toContain("Raichu");
-    expect(pokemonNames).toContain("Pikachu");
+    expect(pokemonNames[0]).toEqual("Pikachu");
+    expect(pokemonNames[1]).toEqual("Raichu");
   });
 });
