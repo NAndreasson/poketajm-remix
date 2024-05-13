@@ -9,6 +9,7 @@ TODOs:
 - [ ] Fix better accessibility for screen readers.
 - [ ] Proper fuzzy search
 - [ ] Fix file upload
+- [ ] Fix hotlinking images
 
 ## What's in the stack
 
