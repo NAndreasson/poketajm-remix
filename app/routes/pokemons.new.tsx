@@ -16,7 +16,7 @@ import {
 } from "~/queries/pokemonEvolutionQueries.server";
 import { ensureDisjointTypes } from "~/utils/set";
 
-// TODO: extract into separate file
+// TODO: move into separate file
 const pokemonCreateSchema = z
   .object({
     name: z.string(),
@@ -61,7 +61,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const pokemon = await createPokemon(parseResult.data);
     return redirect(`/pokemons/${pokemon.id}`);
   } catch (error) {
-    return json({ errors: [error.message] }, { status: 500 });
+    return json({ errors: ["Failed to create pokemon"] }, { status: 500 });
   }
 };
 
